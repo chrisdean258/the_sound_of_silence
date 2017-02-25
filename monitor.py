@@ -14,6 +14,8 @@ while True:
     drlist2 = get_drlist()
     if len(drlist2) > len(drlist1):
        p = subprocess.check_output(["/bin/bash", "-c", command_to_run])
-       finalcommand += p
+       p = p.rstrip()
+       finalcommand = finalcommand + p + " > " + p + ".html"
+       print(finalcommand) 
        subprocess.Popen(["/bin/bash", "-c", finalcommand])
        

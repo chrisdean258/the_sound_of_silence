@@ -217,7 +217,6 @@ void SoundEvents::PrintEventsFormattedTree()
 	int i;
 	int lastHr;
 
-	lastHr=-1;
 
 	for(i=0; i<v.size(); i++)
 		z.insert(make_pair(v[i]->secondOfDay,v[i]));
@@ -228,6 +227,7 @@ void SoundEvents::PrintEventsFormattedTree()
 	{
 		printf("ID%d: %s\n",mit->first,mit->second.at(0)->location.c_str());
 
+		lastHr=-1;
 		for(i=0; i<mit->second.size(); i++)
 		{
 			if(mit->second.at(i)->hour != lastHr)
