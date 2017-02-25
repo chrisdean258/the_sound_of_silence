@@ -3,7 +3,7 @@ import time
 
 folder = "."
 command_to_run = "ls -t | head -n 1"
-finalcommand = "./hellofile "
+finalcommand = "./dataProcessing "
 
 def get_drlist():
     return subprocess.check_output(["ls", folder]).decode('utf-8').strip().split("\n")
