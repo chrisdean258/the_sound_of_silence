@@ -7,6 +7,8 @@
 using namespace std;
 
 
+const string locationsFileName="locationsTestBrent.txt";
+map<int,string> locationsMap;
 
 class SoundEvent
 {
@@ -22,6 +24,7 @@ class SoundEvent
 		int minute;
 		int second;
 		int id;
+		string location;
 		int level;
 
 		int dayTotal;	//day 1 is January 1, 2000
@@ -43,6 +46,7 @@ class SoundEvents
 		void AnalyzeAndPrint_time();
 
 		void PrintEvents();
+		void PrintEventsOneLine();
 		void PrintEventsFormattedTree();
 };
 
@@ -57,14 +61,23 @@ void usage()
 int main(int argc,char** argv)
 {
 	ifstream ifs;
+	ifstream ifs2;
 	string line;
 	SoundEvent* SE;
 	SoundEvents SEs;
 	int i;
+	string s;
 
-	if(argc == 1)
+	if(argc != 2)
 		usage();
 	
+	ifs2.open(locationsFileName.c_str());
+
+	while(ifs2 >> i)
+		ifs2 >> locationsMap[i];
+
+	ifs2.close();
+
 	ifs.open(argv[1]);
 
 	if(ifs.fail())
@@ -82,6 +95,8 @@ int main(int argc,char** argv)
 	ifs.close();
 
 	SEs.PrintEventsFormattedTree();
+	
+//	SEs.PrintEventsOneLine();
 
 	return 0;
 }
@@ -96,6 +111,11 @@ SoundEvent::SoundEvent(string s)
 	int i;
 	
 	sscanf(s.c_str(),"%d/%d/%d %d:%d:%d %d %d",&month,&day,&year,&hour,&minute,&second,&id,&level);
+
+	if(locationsMap.find(id) != locationsMap.end())
+		location=locationsMap[id];
+	else
+		location="Location Not Set";
 
 	secondOfDay = hour*3600 + minute*60 + second;
 
@@ -168,8 +188,8 @@ void SoundEvent::PrintEvent()
 }
 void SoundEvent::PrintEventOneLine()
 {
-	printf("%02d/%02d/%d %02d:%02d:%02d   id: %d   level: %d\n",
-			month,day,year,hour,minute,second,id,level);
+	printf("%02d/%02d/%d %02d:%02d:%02d   id: %d   location: %s    dB level: %d\n",
+			month,day,year,hour,minute,second,id,location.c_str(),level);
 }
 
 void SoundEvents::PrintEvents()
@@ -180,6 +200,13 @@ void SoundEvents::PrintEvents()
 		v[i]->PrintEvent();
 }
 
+void SoundEvents::PrintEventsOneLine()
+{
+	int i;
+
+	for(i=0; i<v.size(); i++)
+		v[i]->PrintEventOneLine();
+}
 
 void SoundEvents::PrintEventsFormattedTree()
 {
@@ -199,7 +226,7 @@ void SoundEvents::PrintEventsFormattedTree()
 
 	for(mit=m.begin(); mit != m.end(); mit++)
 	{
-		printf("ID: %d\n",mit->first);
+		printf("ID%d: %s\n",mit->first,mit->second.at(0)->location.c_str());
 
 		for(i=0; i<mit->second.size(); i++)
 		{
