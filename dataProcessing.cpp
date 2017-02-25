@@ -48,6 +48,7 @@ class SoundEvents
 		void PrintEvents();
 		void PrintEventsOneLine();
 		void PrintEventsFormattedTree();
+		void PrintEventsFormattedTreeHTML();
 };
 
 
@@ -94,9 +95,8 @@ int main(int argc,char** argv)
 
 	ifs.close();
 
-	SEs.PrintEventsFormattedTree();
+	SEs.PrintEventsFormattedTreeHTML();
 	
-//	SEs.PrintEventsOneLine();
 
 	return 0;
 }
@@ -208,6 +208,13 @@ void SoundEvents::PrintEventsOneLine()
 		v[i]->PrintEventOneLine();
 }
 
+void SoundEvents::PrintEventsFormattedTreeHTML()
+{
+	printf("<pre>\n");
+	PrintEventsFormattedTree();
+	printf("<\\pre>\n");
+}
+
 void SoundEvents::PrintEventsFormattedTree()
 {
 	multimap<int,SoundEvent*> z;
@@ -239,7 +246,6 @@ void SoundEvents::PrintEventsFormattedTree()
 			mit->second.at(i)->PrintEventOneLine();
 		}
 	}
-	
 }
 
 
