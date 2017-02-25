@@ -95,8 +95,7 @@ int main(int argc,char** argv)
 
 	ifs.close();
 
-	SEs.PrintEventsFormattedTreeHTML();
-	
+	SEs.PrintEventsFormattedTreeHTML();	
 
 	return 0;
 }
@@ -212,7 +211,7 @@ void SoundEvents::PrintEventsFormattedTreeHTML()
 {
 	printf("<pre>\n");
 	PrintEventsFormattedTree();
-	printf("<\\pre>\n");
+//	printf("<\\pre>\n");
 }
 
 void SoundEvents::PrintEventsFormattedTree()
