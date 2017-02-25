@@ -10,13 +10,15 @@ def get_drlist():
 
 while True:
     drlist1 = get_drlist()
-    time.sleep(5)
+    time.sleep(2)
+    rmcommand = "rm "
     drlist2 = get_drlist()
     if len(drlist2) > len(drlist1):
        p = subprocess.check_output(["/bin/bash", "-c", command_to_run])
        p = p.rstrip()
+       rmcommand = rmcommand + p
        finalcommand = finalcommand + p + " > " + p + ".html"
        print(finalcommand) 
        subprocess.Popen(["/bin/bash", "-c", finalcommand])
-       p = "";
        finalcommand = "./dataProcessing "
+       subprocess.Popen(["/bin/bash", "-c", rmcommand])
