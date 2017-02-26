@@ -109,7 +109,7 @@ SoundEvent::SoundEvent(string s)
 {
 	int i;
 	
-	sscanf(s.c_str(),"%d/%d/%d %d:%d:%d %d %d",&month,&day,&year,&hour,&minute,&second,&id,&level);
+	sscanf(s.c_str(),"%d-%d-%d %d:%d:%d %d %d",&year,&month,&day,&hour,&minute,&second,&id,&level);
 
 	if(locationsMap.find(id) != locationsMap.end())
 		location=locationsMap[id];
