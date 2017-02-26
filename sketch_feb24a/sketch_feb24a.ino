@@ -9,6 +9,7 @@ void loop()
   int sensorValue = analogRead(A0); 
   
   Serial.println(sensorValue);
+  Serial.println("hi");
   //pauses every 1/4 second
   delay(250);
   

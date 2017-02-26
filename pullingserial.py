@@ -10,8 +10,8 @@ def monitor():
            #print line[:-1]         # strip \n
            fields = line[:-1].split('; ');
 
-           // ID = fields[0]
-                 // TIME = int(fields[1])
+           ID = fields[0]
+           TIME = int(fields[1])
            # print fields
            print "device ID: ", ID
            # write to file
@@ -31,7 +31,7 @@ MAIN APPLICATION
 print "Start Serial Monitor"
 print
 
-COMPORT = 4;
+COMPORT = '/dev/ttyACM0';
 BAUDRATE = 115200
 
 monitor()
